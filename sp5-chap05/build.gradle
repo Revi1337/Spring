@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+}
+
+dependencies {
+    implementation 'org.springframework:spring-context:5.0.2.RELEASE'  // spring-context 모듈에 대한 의존을 설정
+}
+
+test {
+    useJUnitPlatform()
+}
