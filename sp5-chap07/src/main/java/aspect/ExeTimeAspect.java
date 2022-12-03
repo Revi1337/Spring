@@ -5,9 +5,11 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
 
+@Order(1)       // TODO Oder() 어노테이션으로 AOP 적용순서를 지정할 수 있음.
 @Aspect
 public class ExeTimeAspect {
 
@@ -28,7 +30,7 @@ public class ExeTimeAspect {
             Signature sig = joinPoint.getSignature();                       // ProceedingJoinPoint 의 getSignature(), getTarget(), getArgs() 메서드는 호출한 메서드의 시그니처, 대상 객체, 인자 목록을 구하는데 사용됨.
             System.out.printf("[Around] %s.%s(%s) 실행 시간 : %d ns\n",      // 자바에서 메서드 이름과 파라미터를 합쳐서 메서드 시그니처라고도 함. 메서드 이름이 다르거나 파라미터 타입, 개수가 다르면 시그니처가 다르다고 표현함. 자바에서 메서드의 리턴 타입이나 익셉션 타입은 시그니처에 포함되지 않음.
                     joinPoint.getTarget().getClass().getSimpleName(),       // Signature getSignature() : 호출되는 메서드에 대한 정보를 구한다, Object getTarget() : 대상 객체를 구한다, Object[] getArgs() : 메서드의 파라미터 목록을 구한다.
-                    sig.getName(), Arrays.toString(joinPoint.getArgs()),    
+                    sig.getName(), Arrays.toString(joinPoint.getArgs()),
                     (finish - start));
         }
     }
